@@ -1,7 +1,5 @@
-ARG ALPINE_VERSION=latest
+ARG ALPINE_VERSION=3.10
 FROM alpine:${ALPINE_VERSION}
-
-LABEL maintainer="Johannes Denninger"
 
 ARG ANSIBLE_VERSION="2.8.5"
 
@@ -22,7 +20,7 @@ RUN set -ex \
     && apk del --no-cache --purge .build-deps \
     && rm -rf /var/cache/apk/* /root/.cache \
     \
-    && ln -s /usr/bin/python3 /usr/bin/python \
+    && ln -s /usr/bin/python3 /usr/bin/python
 
 #
 # Create user ansible
@@ -42,4 +40,4 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 
 WORKDIR /ansible/playbooks
 
-CMD ["ansbile --version"]
+CMD ["ansbile" "--version"]
